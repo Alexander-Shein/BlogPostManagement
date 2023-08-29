@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: blogpostmanagementwebapi 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blogpostmanagementwebapi
+  template:
+    metadata:
+      labels:
+        app: blogpostmanagementwebapi 
+    spec:
+      containers:
+        - name: blogpostmanagementwebapi 
+          image: empcontainerstorage.azurecr.io/blogpostmanagementwebapi
+          ports:
+          - containerPort: 8080
