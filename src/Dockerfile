@@ -20,6 +20,7 @@ COPY ["Architecture/QueryStack/EmpCore.QueryStack.Dapper/EmpCore.QueryStack.Dapp
 COPY ["BlogPostManagementService.Domain/BlogPostManagementService.Domain.csproj", "BlogPostManagementService.Domain/"]
 COPY ["BlogPostManagementService.Persistence/BlogPostManagementService.Persistence.csproj", "BlogPostManagementService.Persistence/"]
 COPY ["Architecture/Infrastructure/EmpCore.Persistence.EntityFrameworkCore/EmpCore.Persistence.EntityFrameworkCore.csproj", "Architecture/Infrastructure/EmpCore.Persistence.EntityFrameworkCore/"]
+COPY ["BlogPostManagementService.Application/BlogPostManagementService.Contracts.dll", "BlogPostManagementService.Application/"]
 RUN dotnet restore "BlogPostManagementService.WebApi/BlogPostManagementService.WebApi.csproj"
 COPY . .
 WORKDIR "/src/BlogPostManagementService.WebApi"

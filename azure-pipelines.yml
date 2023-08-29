@@ -14,7 +14,7 @@ variables:
   dockerRegistryServiceConnection: '8091fe92-baf2-46c5-b0b2-48ec02e25fff'
   imageRepository: 'blogpostmanagementwebapi'
   containerRegistry: 'empcontainerstorage.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  dockerfilePath: '**/src/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'empcontainerstorage18647a15-auth'
 
