@@ -9,11 +9,11 @@ public class EmailAddressMaxLengthExceededFailure : Failure
     public int MaxLength { get; }
     public int ActualLength { get; }
 
-    public EmailAddressMaxLengthExceededFailure(int maxLength, int actualLength) : base(
+    public EmailAddressMaxLengthExceededFailure(int actualLength) : base(
         ErrorCode,
-        $"The length of email must be {maxLength} characters or fewer. You entered {actualLength} characters.")
+        $"The length of email must be {ValueObjects.EmailAddress.MaxLength} characters or fewer. You entered {actualLength} characters.")
     {
-        MaxLength = maxLength;
+        MaxLength = ValueObjects.EmailAddress.MaxLength;
         ActualLength = actualLength;
     }
 }

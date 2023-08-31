@@ -15,15 +15,14 @@ public class PublishStatus : SingleValueObject<string>
 
     public static Result<PublishStatus> From(string publishStatus)
     {
-        if (String.IsNullOrWhiteSpace(publishStatus))
-            return Result.Failure<PublishStatus>(new InvalidPublishStatusFailure(publishStatus));
+        if (String.IsNullOrWhiteSpace(publishStatus)) return new InvalidPublishStatusFailure(publishStatus);
 
         publishStatus = publishStatus.Trim();
 
         var state = List.FirstOrDefault(s =>
             String.Equals(s.Value, publishStatus, StringComparison.OrdinalIgnoreCase));
 
-        if (state == null) return Result.Failure<PublishStatus>(new InvalidPublishStatusFailure(publishStatus));
-        return Result.Success(state);
+        if (state == null) return new InvalidPublishStatusFailure(publishStatus);
+        return state;
     }
 }

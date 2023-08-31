@@ -9,11 +9,11 @@ public class TitleTooShortFailure : Failure
     public int MinLength { get; }
     public int ActualLength { get; }
 
-    public TitleTooShortFailure(int minLength, int actualLength) : base(
+    public TitleTooShortFailure(int actualLength) : base(
         ErrorCode,
-        $"The length of title must be {minLength} characters or more. You entered {actualLength} characters.")
+        $"The length of title must be {ValueObjects.Title.MinLength} characters or more. You entered {actualLength} characters.")
     {
-        MinLength = minLength;
+        MinLength = ValueObjects.Title.MinLength;
         ActualLength = actualLength;
     }
 }

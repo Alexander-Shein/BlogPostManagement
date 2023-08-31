@@ -16,10 +16,10 @@ public class EmbeddedResource : ValueObject
 
     public static Result<EmbeddedResource> Create(Uri url, string caption)
     {
-        if (url == null) return Result.Failure<EmbeddedResource>(EmptyUrlFailure.Instance);
-        if (String.IsNullOrEmpty(caption)) return Result.Failure<EmbeddedResource>(EmptyCaptionFailure.Instance);
+        if (url == null) return EmptyUrlFailure.Instance;
+        if (String.IsNullOrEmpty(caption)) return EmptyCaptionFailure.Instance;
 
-        return Result.Success(new EmbeddedResource(url, caption.Trim()));
+        return new EmbeddedResource(url, caption.Trim());
     }
 
     protected override IEnumerable<IComparable> GetEqualityComponents()

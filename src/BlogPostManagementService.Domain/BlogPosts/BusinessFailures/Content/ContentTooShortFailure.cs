@@ -9,11 +9,11 @@ public class ContentTooShortFailure : Failure
     public int MinLength { get; }
     public int ActualLength { get; }
 
-    public ContentTooShortFailure(int minLength, int actualLength) : base(
+    public ContentTooShortFailure(int actualLength) : base(
         ErrorCode,
-        $"The length of content must be {minLength} characters or more. You entered {actualLength} characters.")
+        $"The length of content must be {ValueObjects.Content.MinLength} characters or more. You entered {actualLength} characters.")
     {
-        MinLength = minLength;
+        MinLength = ValueObjects.Content.MinLength;
         ActualLength = actualLength;
     }
 }

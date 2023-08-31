@@ -5,9 +5,9 @@ namespace BlogPostManagementService.Domain.BlogPosts.ValueObjects;
 
 public class Content : ValueObject
 {
-    private const int MinLength = 100;
-    private const int MaxLenght = 100_000;
-    private static readonly IEnumerable<string> BlacklistedWorlds = new List<string> { "Word1", "Word2", "Word3" };
+    public const int MinLength = 100;
+    public const int MaxLenght = 100_000;
+    private static readonly IEnumerable<string> BlacklistedWords = new List<string> { "Word1", "Word2", "Word3" };
 
     public string Text { get; }
     public IReadOnlyList<EmbeddedResource> EmbeddedResources => _embeddedResources.ToList();
@@ -25,23 +25,27 @@ public class Content : ValueObject
 
     public static Result<Content> Create(string text, IEnumerable<EmbeddedResource> embeddedResources)
     {
-        if (string.IsNullOrWhiteSpace(text)) return Result.Failure<Content>(EmptyContentFailure.Instance);
-        text = text.Trim();
+        text = text?.Trim();
+        
+        if (string.IsNullOrWhiteSpace(text)) return EmptyContentFailure.Instance;
+        if (text.Length > MaxLenght) return new ContentMaxLengthExceededFailure(text.Length);
+        if (text.Length < MinLength) return new ContentTooShortFailure(text.Length);
 
-        if (text.Length > MaxLenght)
-            return Result.Failure<Content>(new ContentMaxLengthExceededFailure(MaxLenght, text.Length));
+        text = HideBlacklistedWords(text);
 
-        if (text.Length < MinLength)
-            return Result.Failure<Content>(new ContentTooShortFailure(MinLength, text.Length));
-
-        foreach (var blackListedWord in BlacklistedWorlds)
+        return new Content(text, embeddedResources);
+    }
+    
+    private static string HideBlacklistedWords(string text)
+    {
+        foreach (var blackListedWord in BlacklistedWords)
         {
             text = text.Replace(blackListedWord, "***", StringComparison.OrdinalIgnoreCase);
         }
 
-        return Result.Success(new Content(text, embeddedResources));
+        return text;
     }
-
+    
     protected override IEnumerable<IComparable> GetEqualityComponents()
     {
         yield return Text;

@@ -17,6 +17,6 @@ public class Author : Entity<string>
             FeedbackEmailAddress = feedbackEmailAddress ?? throw new ArgumentNullException(nameof(feedbackEmailAddress))
         };
 
-        return Result.Success(author);
+        return author;
     }
 }

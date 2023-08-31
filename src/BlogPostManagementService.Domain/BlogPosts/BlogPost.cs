@@ -39,13 +39,13 @@ public class BlogPost : AggregateRoot<Guid>
             UpdatedAt = now
         };
 
-        return Result.Success(blogPost);
+        return blogPost;
     }
 
     public Result Update(string updatedBy, Title? title = null, Content? content = null)
     {
-        if (Author.Id != updatedBy) return Result.Failure(new BlogPostUpdateForbiddenFailure(Id));
-        if (IsDeleted) return Result.Failure(new BlogPostIsDeletedFailure(Id));
+        if (Author.Id != updatedBy) return new BlogPostUpdateForbiddenFailure(Id);
+        if (IsDeleted) return new BlogPostIsDeletedFailure(Id);
         
         var now = DateTime.UtcNow;
         
@@ -66,8 +66,8 @@ public class BlogPost : AggregateRoot<Guid>
 
     public Result Publish(string publishedBy)
     {
-        if (Author.Id != publishedBy) return Result.Failure(new BlogPostUpdateForbiddenFailure(Id));
-        if (IsDeleted) return Result.Failure(new BlogPostIsDeletedFailure(Id));
+        if (Author.Id != publishedBy) return new BlogPostUpdateForbiddenFailure(Id);
+        if (IsDeleted) return new BlogPostIsDeletedFailure(Id);
 
         PublishStatus = PublishStatus.Released;
         PublishDateTime = UpdatedAt = DateTime.UtcNow;
@@ -78,7 +78,7 @@ public class BlogPost : AggregateRoot<Guid>
     
     public Result Delete(string deletedBy)
     {
-        if (Author.Id != deletedBy) return Result.Failure(new BlogPostUpdateForbiddenFailure(Id));
+        if (Author.Id != deletedBy) return new BlogPostUpdateForbiddenFailure(Id);
         if (IsDeleted) return Result.Success();
 
         IsDeleted = true;

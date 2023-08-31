@@ -9,11 +9,11 @@ public class TitleMaxLengthExceededFailure : Failure
     public int MaxLength { get; }
     public int ActualLength { get; }
 
-    public TitleMaxLengthExceededFailure(int maxLength, int actualLength) : base(
+    public TitleMaxLengthExceededFailure(int actualLength) : base(
         ErrorCode,
-        $"The length of title must be {maxLength} characters or fewer. You entered {actualLength} characters.")
+        $"The length of title must be {ValueObjects.Title.MaxLenght} characters or fewer. You entered {actualLength} characters.")
     {
-        MaxLength = maxLength;
+        MaxLength = ValueObjects.Title.MaxLenght;
         ActualLength = actualLength;
     }
 }
