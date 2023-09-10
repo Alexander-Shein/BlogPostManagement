@@ -8,7 +8,7 @@ There're endpoints:
 - `POST /v{version}/blog-posts` - creates a new draft blog post
 - `GET /v{version}/blog-posts/{blogPostId}` - gets a blog post by its id
 - `PATCH /v{version}/blog-posts/{blogPostId}` - partial update for a blog post. I ussualy use PATCH instead of PUT for update. Because partial update covers more cases than full replace
-- `DELETE /v{version}/blog-posts/{blogPostId}` - deletes a blog post by id. This endpoint sends DeletedBlogPostEvent. The CommentManagement service is subscribed to this event.
+- `DELETE /v{version}/blog-posts/{blogPostId}` - deletes a blog post by id. This endpoint sends DeletedBlogPostEvent. The CommentManagement service is subscribed to this event. Soft delete is used (IsDeleted flag)
 - `PUT /v{version}/published-blog-posts/{blogPostId}` - it updates a blog post status from draft to published. It sends an integration event 'BlogPostPublishedEvent'. The Commentmanagement service is subscribed to this event and it enables comments once a blog post is published.
 
 All the entities and Aggregate Roots are incapsulated and they are always in the correct state. Because of incapsulation it is not possible to create an entity or change it to an invalid state.
