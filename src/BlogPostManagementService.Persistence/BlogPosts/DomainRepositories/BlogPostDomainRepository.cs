@@ -5,27 +5,27 @@ namespace BlogPostManagementService.Persistence.BlogPosts.DomainRepositories;
 
 public class BlogPostDomainRepository : IBlogPostDomainRepository
 {
-    private readonly ApplicationDbContext _dbContext;
+    private readonly AppDbContext _appDbContext;
 
-    public BlogPostDomainRepository(ApplicationDbContext dbContext)
+    public BlogPostDomainRepository(AppDbContext dbContext)
     {
-        _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+        _appDbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
     }
 
     public async Task<BlogPost?> GetByIdAsync(Guid blogPostId)
     {
         if (blogPostId == Guid.Empty) return null;
         
-        return await _dbContext.FindAsync<BlogPost>(blogPostId).ConfigureAwait(false);
+        return await _appDbContext.FindAsync<BlogPost>(blogPostId).ConfigureAwait(false);
     }
 
     public void Save(BlogPost blogPost)
     {
-        _dbContext.Add(blogPost ?? throw new ArgumentNullException(nameof(blogPost)));
+        _appDbContext.Add(blogPost ?? throw new ArgumentNullException(nameof(blogPost)));
     }
 
     public void Update(BlogPost blogPost)
     {
-        _dbContext.Update(blogPost ?? throw new ArgumentNullException(nameof(blogPost)));
+        _appDbContext.Update(blogPost ?? throw new ArgumentNullException(nameof(blogPost)));
     }
 }

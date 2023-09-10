@@ -1,28 +1,19 @@
 ﻿using BlogPostManagementService.Application.BlogPosts.Commands.CreateDraftBlogPost.DTOs;
 using BlogPostManagementService.Domain.BlogPosts.ValueObjects;
 using BlogPostManagementService.Persistence.BlogPosts.DomainRepositories;
-using EmpCore.Application.ApplicationFailures;
-using EmpCore.Application.Middleware.DomainEventsDispatcher;
+using EmpCore.Application.Failures;
 using EmpCore.Domain;
-using EmpCore.Infrastructure.Persistence;
 using MediatR;
 
 namespace BlogPostManagementService.Application.BlogPosts.Commands.UpdateBlogPost;
 
 public class UpdateBlogPostCommandHandler : IRequestHandler<UpdateBlogPostCommand, Result>
 {
-    private readonly IDomainEventsHolder _domainEventsHolder;
     private readonly IBlogPostDomainRepository _blogPostDomainRepository;
-    private readonly IUnitOfWork _unitOfWork;
 
-    public UpdateBlogPostCommandHandler(
-        IDomainEventsHolder domainEventsHolder,
-        IBlogPostDomainRepository blogPostDomainRepository,
-        IUnitOfWork unitOfWork)
+    public UpdateBlogPostCommandHandler(IBlogPostDomainRepository blogPostDomainRepository)
     {
-        _domainEventsHolder = domainEventsHolder ?? throw new ArgumentNullException(nameof(domainEventsHolder));
         _blogPostDomainRepository = blogPostDomainRepository ?? throw new ArgumentNullException(nameof(blogPostDomainRepository));
-        _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
     }
 
     public async Task<Result> Handle(UpdateBlogPostCommand command, CancellationToken ct)
@@ -30,8 +21,11 @@ public class UpdateBlogPostCommandHandler : IRequestHandler<UpdateBlogPostComman
         if (command == null) throw new ArgumentNullException(nameof(command));
 
         var blogPost = await _blogPostDomainRepository.GetByIdAsync(command.BlogPostId).ConfigureAwait(false); ;
-        if (blogPost == null) return Result.Failure(ResourceNotFoundFailure.Instance);
+        if (blogPost == null) return Result.Fail(ResourceNotFoundFailure.Instance);
 
+        var updatedBy = AuthorId.Create(command.UpdatedBy);
+        if (updatedBy.IsFailure) return updatedBy;
+        
         Title? newTitle = null;
         if (command.Title != null)
         {
@@ -58,15 +52,12 @@ public class UpdateBlogPostCommandHandler : IRequestHandler<UpdateBlogPostComman
             newContent = content;
         }
 
-        var result = blogPost.Update(command.UpdatedBy, newTitle, newContent);
+        var result = blogPost.Update(updatedBy, newTitle, newContent);
         if (result.IsFailure) return result;
 
         _blogPostDomainRepository.Update(blogPost);
-        await _unitOfWork.SaveAsync().ConfigureAwait(false);
 
-        _domainEventsHolder.AddFrom(blogPost);
-
-        return Result.Success();
+        return Result.Ok();
     }
 
     private static Result<Content> BuildContent(string text, IEnumerable<EmbeddedResourceDto> embeddedResources)
@@ -80,7 +71,7 @@ public class UpdateBlogPostCommandHandler : IRequestHandler<UpdateBlogPostComman
                 .ToArray();
 
             var result = Result.Combine(embeddedResourcesResult);
-            if (result.IsFailure) return Result.Failure<Content>(result.Failures);
+            if (result.IsFailure) return Result.Fail<Content>(result.Failures);
             embeddedResourcesDomain = embeddedResourcesResult.Select(er => er.Value);
         }
         

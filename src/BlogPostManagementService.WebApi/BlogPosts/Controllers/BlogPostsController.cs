@@ -9,8 +9,8 @@ using BlogPostManagementService.Application.BlogPosts.Queries.SearchBlogPosts;
 using BlogPostManagementService.Application.BlogPosts.Queries.SearchBlogPosts.DTOs;
 using BlogPostManagementService.WebApi.BlogPosts.Models;
 using EmpCore.Api.Middleware.Security;
-using EmpCore.Application.Queries;
 using EmpCore.Domain;
+using EmpCore.QueryStack;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

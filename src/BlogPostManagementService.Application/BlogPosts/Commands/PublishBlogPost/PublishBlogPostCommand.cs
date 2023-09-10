@@ -4,7 +4,7 @@ using MediatR;
 
 namespace BlogPostManagementService.Application.BlogPosts.Commands.PublishBlogPost;
 
-public class PublishBlogPostCommand : Command, IRequest<Result>
+public class PublishBlogPostCommand : Command<Result>
 {
     public string PublishedBy { get; }
     public Guid BlogPostId { get; }

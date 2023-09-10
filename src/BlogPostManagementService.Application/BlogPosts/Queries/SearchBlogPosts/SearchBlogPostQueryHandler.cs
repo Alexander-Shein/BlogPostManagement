@@ -1,6 +1,6 @@
 ﻿using BlogPostManagementService.Application.BlogPosts.Queries.SearchBlogPosts.DTOs;
 using Dapper;
-using EmpCore.Application.Queries;
+using EmpCore.QueryStack;
 using EmpCore.QueryStack.Dapper;
 using MediatR;
 

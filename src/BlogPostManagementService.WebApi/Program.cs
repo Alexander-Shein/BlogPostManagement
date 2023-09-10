@@ -28,7 +28,7 @@ var redisInstanceName = builder.Configuration["Redis:InstanceName"];
 builder.Services.AddRedisCache(redisServer, redisInstanceName);
 
 // Add Infrastructure
-builder.Services.AddApplicationDbContext(oltpSqlConnectionString, persistenceAssembly);
+builder.Services.AddAppDbContext(oltpSqlConnectionString, persistenceAssembly);
 builder.Services.AddCapMessageBus(oltpSqlConnectionString, azureServiceBusConnectionString, applicationAssembly);
 
 // Add Application

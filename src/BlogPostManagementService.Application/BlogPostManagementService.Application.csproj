@@ -10,6 +10,7 @@
       <ProjectReference Include="..\Architecture\Application\EmpCore.Application\EmpCore.Application.csproj" />
       <ProjectReference Include="..\Architecture\Infrastructure\EmpCore.Infrastructure\EmpCore.Infrastructure.csproj" />
       <ProjectReference Include="..\Architecture\QueryStack\EmpCore.QueryStack.Dapper\EmpCore.QueryStack.Dapper.csproj" />
+      <ProjectReference Include="..\Architecture\QueryStack\EmpCore.QueryStack\EmpCore.QueryStack.csproj" />
       <ProjectReference Include="..\BlogPostManagementService.Domain\BlogPostManagementService.Domain.csproj" />
       <ProjectReference Include="..\BlogPostManagementService.Persistence\BlogPostManagementService.Persistence.csproj" />
     </ItemGroup>

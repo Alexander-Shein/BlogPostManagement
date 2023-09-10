@@ -42,7 +42,7 @@ public class BlogPost : AggregateRoot<Guid>
         return blogPost;
     }
 
-    public Result Update(string updatedBy, Title? title = null, Content? content = null)
+    public Result Update(AuthorId updatedBy, Title? title = null, Content? content = null)
     {
         if (Author.Id != updatedBy) return new BlogPostUpdateForbiddenFailure(Id);
         if (IsDeleted) return new BlogPostIsDeletedFailure(Id);
@@ -61,10 +61,10 @@ public class BlogPost : AggregateRoot<Guid>
             UpdatedAt = now;
         }
 
-        return Result.Success();
+        return Result.Ok();
     }
 
-    public Result Publish(string publishedBy)
+    public Result Publish(AuthorId publishedBy)
     {
         if (Author.Id != publishedBy) return new BlogPostUpdateForbiddenFailure(Id);
         if (IsDeleted) return new BlogPostIsDeletedFailure(Id);
@@ -72,19 +72,19 @@ public class BlogPost : AggregateRoot<Guid>
         PublishStatus = PublishStatus.Released;
         PublishDateTime = UpdatedAt = DateTime.UtcNow;
         
-        AddDomainEvent(new BlogPostPublishedDomainEvent(Id, Author.Id, PublishDateTime.Value, Author.FeedbackEmailAddress));
-        return Result.Success();
+        RaiseDomainEvent(new BlogPostPublishedDomainEvent(Id, Author.Id, PublishDateTime.Value, Author.FeedbackEmailAddress));
+        return Result.Ok();
     }
     
-    public Result Delete(string deletedBy)
+    public Result Delete(AuthorId deletedBy)
     {
         if (Author.Id != deletedBy) return new BlogPostUpdateForbiddenFailure(Id);
-        if (IsDeleted) return Result.Success();
+        if (IsDeleted) return Result.Ok();
 
         IsDeleted = true;
         UpdatedAt = DateTime.UtcNow;
         
-        AddDomainEvent(new BlogPostDeletedDomainEvent(Id, Author.Id));
-        return Result.Success();
+        RaiseDomainEvent(new BlogPostDeletedDomainEvent(Id, Author.Id));
+        return Result.Ok();
     }
 }

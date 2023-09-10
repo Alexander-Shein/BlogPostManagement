@@ -15,11 +15,11 @@ public class Title : SingleValueObject<string>
     {
         title = title?.Trim();
         
-        if (string.IsNullOrWhiteSpace(title)) return Result.Failure<Title>(EmptyTitleFailure.Instance);
+        if (string.IsNullOrWhiteSpace(title)) return EmptyTitleFailure.Instance;
         if (title.Length > MaxLenght) return new TitleMaxLengthExceededFailure(title.Length);
         if (title.Length < MinLength) return new TitleTooShortFailure(title.Length);
         if (title.Any(NotAllowedCharacters.Contains)) return NotAllowedTitleCharactersFailure.Instance;
 
-        return Result.Success(new Title(title));
+        return Result.Ok(new Title(title));
     }
 }

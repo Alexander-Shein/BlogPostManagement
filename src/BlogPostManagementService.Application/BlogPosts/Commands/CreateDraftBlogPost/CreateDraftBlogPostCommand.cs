@@ -1,11 +1,10 @@
 using BlogPostManagementService.Application.BlogPosts.Commands.CreateDraftBlogPost.DTOs;
 using EmpCore.Application.Commands;
 using EmpCore.Domain;
-using MediatR;
 
 namespace BlogPostManagementService.Application.BlogPosts.Commands.CreateDraftBlogPost;
 
-public class CreateDraftBlogPostCommand : Command, IRequest<Result<Guid>>
+public class CreateDraftBlogPostCommand : Command<Result<Guid>>
 {
     public string AuthorId { get; }
     public string FeedbackEmailAddress { get; }

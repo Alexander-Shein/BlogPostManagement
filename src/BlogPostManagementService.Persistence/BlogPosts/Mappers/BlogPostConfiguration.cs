@@ -15,7 +15,10 @@ namespace BlogPostManagementService.Persistence.BlogPosts.Mappers
 
             builder.OwnsOne(p => p.Author, a =>
             {
-                a.Property(u => u.Id).HasColumnName("AuthorId").HasColumnType("VARCHAR(128)").IsRequired();
+                a.OwnsOne(x => x.Id, c =>
+                {
+                    c.Property(f => f.Value).HasColumnName("AuthorId").HasColumnType("VARCHAR(128)").IsRequired();
+                });
 
                 a.OwnsOne(x => x.FeedbackEmailAddress, c =>
                 {

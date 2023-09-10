@@ -1,6 +1,9 @@
-﻿namespace EmpCore.Domain;
+﻿using MediatR;
 
-public abstract class DomainEvent
+namespace EmpCore.Domain;
+
+[Serializable]
+public abstract class DomainEvent : INotification
 {
-    public DateTime CreatedAt { get; } = DateTime.UtcNow;
+    public DateTime RaisedAt { get; } = DateTime.UtcNow;
 }

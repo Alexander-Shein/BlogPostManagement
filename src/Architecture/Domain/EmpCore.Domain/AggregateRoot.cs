@@ -6,7 +6,7 @@ public abstract class AggregateRoot<IId> : Entity<IId>
     public IReadOnlyList<DomainEvent> DomainEvents => _domainEvents.ToList();
     private readonly HashSet<DomainEvent> _domainEvents = new();
 
-    protected void AddDomainEvent(DomainEvent domainEvent)
+    protected void RaiseDomainEvent(DomainEvent domainEvent)
     {
         _domainEvents.Add(domainEvent ?? throw new ArgumentNullException(nameof(domainEvent)));
     }

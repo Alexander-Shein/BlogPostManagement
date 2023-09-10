@@ -5,7 +5,7 @@ using MediatR;
 
 namespace BlogPostManagementService.Application.BlogPosts.Commands.UpdateBlogPost;
 
-public class UpdateBlogPostCommand : Command, IRequest<Result>
+public class UpdateBlogPostCommand : Command<Result>
 {
     public string UpdatedBy { get; }
     public Guid BlogPostId { get; }

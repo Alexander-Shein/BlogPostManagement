@@ -1,10 +1,9 @@
 ﻿using BlogPostManagementService.Application.BlogPosts.Queries.SearchBlogPosts.DTOs;
-using EmpCore.Application.Queries;
-using MediatR;
+using EmpCore.QueryStack;
 
 namespace BlogPostManagementService.Application.BlogPosts.Queries.SearchBlogPosts
 {
-    public class SearchBlogPostsQuery : IRequest<PagedList<BlogPostListItemDto>>
+    public class SearchBlogPostsQuery : Query<PagedList<BlogPostListItemDto>>
     {
         public int PageSize { get; }
         public int PageNumber { get; }

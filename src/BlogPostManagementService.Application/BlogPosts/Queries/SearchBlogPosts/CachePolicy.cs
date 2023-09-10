@@ -1,10 +1,10 @@
 ﻿using BlogPostManagementService.Application.BlogPosts.Queries.SearchBlogPosts.DTOs;
-using EmpCore.Application.Middleware.Caching;
-using EmpCore.Application.Queries;
+using EmpCore.QueryStack;
+using EmpCore.QueryStack.Middleware.Caching;
 
 namespace BlogPostManagementService.Application.BlogPosts.Queries.SearchBlogPosts
 {
-    public class SearchBlogPostsQueryCachePolicy : CachePolicy<SearchBlogPostsQuery, PagedList<BlogPostListItemDto>>
+    public class CachePolicy : CachePolicy<SearchBlogPostsQuery, PagedList<BlogPostListItemDto>>
     {
         public override TimeSpan? AbsoluteExpirationRelativeToNow => TimeSpan.FromSeconds(15);
     }
