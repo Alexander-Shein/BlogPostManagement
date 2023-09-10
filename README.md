@@ -1,8 +1,12 @@
 # BlogPostManagement
 
 Deployed here: http://blog-post-management.polandcentral.cloudapp.azure.com/swagger/index.html
+
 Architecture details: https://github.com/Alexander-Shein/EmpCore
+
 There're endpoints:
+
+FYI: Put version `1` everywhere when you test
 
 - `GET /v{version}/blog-posts` - searches for blog posts. It returns a paged result.
 - `POST /v{version}/blog-posts` - creates a new draft blog post
