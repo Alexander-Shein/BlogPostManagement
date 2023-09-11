@@ -12,6 +12,7 @@ using EmpCore.Api.Middleware.Security;
 using EmpCore.Domain;
 using EmpCore.QueryStack;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogPostManagementService.WebApi.BlogPosts.Controllers;
@@ -19,6 +20,7 @@ namespace BlogPostManagementService.WebApi.BlogPosts.Controllers;
 [ProducesResponseType(typeof(void), StatusCodes.Status401Unauthorized)]
 [ProducesResponseType(typeof(void), StatusCodes.Status403Forbidden)]
 [ProducesResponseType(typeof(void), StatusCodes.Status500InternalServerError)]
+[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class BlogPostsController : ControllerBase
