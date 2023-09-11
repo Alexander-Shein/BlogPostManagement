@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - blog-post.management.polandcentral.cloudapp.azure.com
+    - management.polandcentral.cloudapp.azure.com/blog-post
     secretName: blog-post-secret-name
   rules:
-  - host: blog-post.management.polandcentral.cloudapp.azure.com
+  - host: management.polandcentral.cloudapp.azure.com/blog-post
     http:
       paths:
       - path: /
