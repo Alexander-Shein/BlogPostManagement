@@ -25,7 +25,7 @@ For QueryStack fast dapper is used.
 
 - It sends 2 events via Azure Service Bus: BlogPostPublishedEvent and BlogPostDeletedEvent. CommentManagementService is subscribed to these evetns.
 
-DB Schema
+BlogPostManagement DB Schema
 ``` SQL
 CREATE TABLE [dbo].[BlogPost]
 (
