@@ -9,7 +9,7 @@ spec:
   tls:
   - hosts:
     - blog-post-management.polandcentral.cloudapp.azure.com
-    secretName: emp-issuer-account-key
+    secretName: blog-post-secret-name
   rules:
   - host: blog-post-management.polandcentral.cloudapp.azure.com
     http:
