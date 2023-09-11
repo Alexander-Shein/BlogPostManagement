@@ -1,12 +1,23 @@
-apiVersion: v1
-kind: Service
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
     name: blogpostmanagementwebapi
+    annotations:
+        kubernetes.io/ingress.class: azure/application-gateway
+        cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
-    type: LoadBalancer
-    ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-    selector:
-        app: blogpostmanagementwebapi
+  tls:
+  - hosts:
+    - blog-post-management.polandcentral.cloudapp.azure.com
+    secretName: blog-post-secret-name
+  rules:
+  - host: blog-post-management.polandcentral.cloudapp.azure.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+              name: blogpostmanagementwebapi
+              port:
+                  number: 80
