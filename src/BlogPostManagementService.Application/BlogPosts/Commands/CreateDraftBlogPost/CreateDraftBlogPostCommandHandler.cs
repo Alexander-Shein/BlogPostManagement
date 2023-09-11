@@ -49,17 +49,20 @@ public class CreateDraftBlogPostCommandHandler : IRequestHandler<CreateDraftBlog
 
     private static Result<Content> BuildContent(string text, IEnumerable<EmbeddedResourceDto> embeddedResources)
     {
-        var embeddedResourcesDomain = Enumerable.Empty<EmbeddedResource>();
+        var embeddedResourcesDomain = new List<EmbeddedResource>();
         
         if (embeddedResources.Any())
         {
-            var embeddedResourcesResult = embeddedResources
-                .Select(er => EmbeddedResource.Create(new Uri(er.Url), er.Caption))
-                .ToArray();
+            foreach (var embeddedResource in embeddedResources)
+            {
+                var url = Url.Create(embeddedResource.Url);
+                if (url.IsFailure) return Result.Fail<Content>(url.Failures);
 
-            var result = Result.Combine(embeddedResourcesResult);
-            if (result.IsFailure) return Result.Fail<Content>(result.Failures);
-            embeddedResourcesDomain = embeddedResourcesResult.Select(er => er.Value);
+                var er = EmbeddedResource.Create(url, embeddedResource.Caption);
+                if (er.IsFailure) return Result.Fail<Content>(er.Failures);
+                
+                embeddedResourcesDomain.Add(er);
+            }
         }
         
         var content = Content.Create(text, embeddedResourcesDomain);
