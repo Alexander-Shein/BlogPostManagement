@@ -1,6 +1,6 @@
 # BlogPostManagement
 
-- Deployed here: http://blog-post-management.polandcentral.cloudapp.azure.com/swagger/index.html
+- Deployed here: https://blog-post-management.polandcentral.cloudapp.azure.com/swagger/index.html
 
 - Architecture details: https://github.com/Alexander-Shein/EmpCore
 
