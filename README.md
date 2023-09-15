@@ -25,8 +25,10 @@ For QueryStack fast dapper is used.
 
 - It sends 2 events via Azure Service Bus: BlogPostPublishedEvent and BlogPostDeletedEvent. CommentManagementService is subscribed to these evetns.
 
+P.S. Sometimes code return `Result` and sometimes it throws an exception. The difference between them is if it throws an exception it's a bug in code. If it returns a `Result` object - it's a validation failure. Before you decide to return a `Result` or to throw an error you need to ask a question - Can a user do something with it? If yes - return a `Result` object. If no - throw an exception.
+
 BlogPostManagement DB Schema
-``` SQL
+```SQL
 CREATE TABLE [dbo].[BlogPost]
 (
   	[Id]			UNIQUEIDENTIFIER NOT NULL,
