@@ -19,21 +19,22 @@ public class BlogPost : AggregateRoot<Guid>
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
 
-    public static Result<BlogPost> CreateDraftBlogPost(
-        Author author,
-        Title title,
-        Content content)
+    public static Result<BlogPost> CreateDraftBlogPost(Author author, Title title, Content content)
     {
+        Contracts.Require(author != null);
+        Contracts.Require(title != null);
+        Contracts.Require(content != null);
+        
         var now = DateTime.UtcNow;
 
         var blogPost = new BlogPost
         {
             Id = Guid.NewGuid(),
-            Author = author ?? throw new ArgumentNullException(nameof(author)),
-            Title = title ?? throw new ArgumentNullException(nameof(title)),
+            Author = author,
+            Title = title,
             PublishStatus = PublishStatus.Draft,
             PublishDateTime = null,
-            Content = content ?? throw new ArgumentNullException(nameof(content)),
+            Content = content,
             IsDeleted = false,
             CreatedAt = now,
             UpdatedAt = now

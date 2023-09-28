@@ -11,6 +11,8 @@ public class BlogPostUpdateForbiddenFailure : Failure
 
     public BlogPostUpdateForbiddenFailure(Guid blogPostId) : base(ErrorCode, ErrorMessage)
     {
+        Contracts.Require(blogPostId != Guid.Empty);
+        
         BlogPostId = blogPostId;
     }
 }

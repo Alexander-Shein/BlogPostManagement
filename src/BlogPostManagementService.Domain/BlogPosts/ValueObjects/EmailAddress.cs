@@ -7,9 +7,7 @@ public class EmailAddress : SingleValueObject<string>
 {
     public const int MaxLength = 256;
 
-    private EmailAddress(string value) : base(value)
-    {
-    }
+    private EmailAddress(string value) : base(value) { }
 
     public static Result<EmailAddress> Create(string emailAddress)
     {
@@ -28,6 +26,11 @@ public class EmailAddress : SingleValueObject<string>
             return new InvalidEmailAddressFailure(emailAddress);
         }
 
-        return new EmailAddress(emailAddress.ToUpperInvariant());
+        return new EmailAddress(emailAddress);
+    }
+
+    protected override IEnumerable<IComparable> GetEqualityComponents()
+    {
+        yield return Value.ToUpperInvariant();
     }
 }

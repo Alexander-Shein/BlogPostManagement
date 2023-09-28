@@ -6,16 +6,14 @@ namespace BlogPostManagementService.Domain.BlogPosts.ValueObjects;
 public class Content : ValueObject
 {
     public const int MinLength = 100;
-    public const int MaxLenght = 100_000;
+    public const int MaxLength = 100_000;
     private static readonly IEnumerable<string> BlacklistedWords = new List<string> { "Word1", "Word2", "Word3" };
 
     public string Text { get; }
     public IReadOnlyList<EmbeddedResource> EmbeddedResources => _embeddedResources.ToList();
     private List<EmbeddedResource> _embeddedResources;
 
-    private Content(string text) : this(text, Enumerable.Empty<EmbeddedResource>())
-    {
-    }
+    private Content(string text) : this(text, Enumerable.Empty<EmbeddedResource>()) { }
     
     private Content(string text, IEnumerable<EmbeddedResource> embeddedResources)
     {
@@ -28,7 +26,7 @@ public class Content : ValueObject
         text = text?.Trim();
         
         if (string.IsNullOrWhiteSpace(text)) return EmptyContentFailure.Instance;
-        if (text.Length > MaxLenght) return new ContentMaxLengthExceededFailure(text.Length);
+        if (text.Length > MaxLength) return new ContentMaxLengthExceededFailure(text.Length);
         if (text.Length < MinLength) return new ContentTooShortFailure(text.Length);
 
         text = HideBlacklistedWords(text);

@@ -9,10 +9,13 @@ public class Author : Entity<AuthorId>
 
     public static Result<Author> Create(AuthorId id, EmailAddress feedbackEmailAddress)
     {
+        Contracts.Require(id != null);
+        Contracts.Require(feedbackEmailAddress != null);
+        
         var author = new Author
         {
-            Id = id ?? throw new ArgumentNullException(nameof(id)),
-            FeedbackEmailAddress = feedbackEmailAddress ?? throw new ArgumentNullException(nameof(feedbackEmailAddress))
+            Id = id,
+            FeedbackEmailAddress = feedbackEmailAddress
         };
 
         return author;

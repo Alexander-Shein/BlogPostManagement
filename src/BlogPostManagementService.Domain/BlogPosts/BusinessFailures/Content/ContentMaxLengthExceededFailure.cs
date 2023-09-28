@@ -11,9 +11,9 @@ public class ContentMaxLengthExceededFailure : Failure
 
     public ContentMaxLengthExceededFailure(int actualLength) : base(
         ErrorCode,
-        $"The length of content must be {ValueObjects.Content.MaxLenght} characters or fewer. You entered {actualLength} characters.")
+        $"The length of content must be {ValueObjects.Content.MaxLength} characters or fewer. You entered {actualLength} characters.")
     {
-        MaxLength = ValueObjects.Content.MaxLenght;
+        MaxLength = ValueObjects.Content.MaxLength;
         ActualLength = actualLength;
     }
 }

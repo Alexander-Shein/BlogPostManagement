@@ -1,15 +1,18 @@
-﻿using EmpCore.Domain;
-using MediatR;
+﻿using BlogPostManagementService.Domain.BlogPosts.ValueObjects;
+using EmpCore.Domain;
 
 namespace BlogPostManagementService.Domain.BlogPosts.DomainEvents
 {
-    public class BlogPostDeletedDomainEvent : DomainEvent, INotification
+    public class BlogPostDeletedDomainEvent : DomainEvent
     {
         public Guid BlogPostId { get; }
-        public string AuthorId { get; }
+        public AuthorId AuthorId { get; }
 
-        public BlogPostDeletedDomainEvent(Guid blogPostId, string authorId)
+        internal BlogPostDeletedDomainEvent(Guid blogPostId, AuthorId authorId)
         {
+            Contracts.Require(blogPostId != Guid.Empty);
+            Contracts.Require(authorId != null);
+            
             BlogPostId = blogPostId;
             AuthorId = authorId;
         }
