@@ -1,6 +1,6 @@
 ﻿using EmpCore.Domain;
 
-namespace BlogPostManagementService.Domain.BlogPosts.BusinessFailures.BlogPost;
+namespace BlogPostManagementService.Domain.BlogPosts.BusinessRules.BlogPost;
 
 public class BlogPostIsDeletedFailure : Failure
 {

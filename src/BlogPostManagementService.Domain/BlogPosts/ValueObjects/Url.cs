@@ -1,5 +1,5 @@
-using BlogPostManagementService.Domain.BlogPosts.BusinessFailures.EmbeddedResourse;
-using BlogPostManagementService.Domain.BlogPosts.BusinessFailures.Url;
+using BlogPostManagementService.Domain.BlogPosts.BusinessRules.EmbeddedResourse;
+using BlogPostManagementService.Domain.BlogPosts.BusinessRules.Url;
 using EmpCore.Domain;
 
 namespace BlogPostManagementService.Domain.BlogPosts.ValueObjects;

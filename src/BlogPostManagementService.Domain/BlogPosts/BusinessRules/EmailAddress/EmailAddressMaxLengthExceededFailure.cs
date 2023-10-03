@@ -1,6 +1,6 @@
 ﻿using EmpCore.Domain;
 
-namespace BlogPostManagementService.Domain.BlogPosts.BusinessFailures.EmailAddress;
+namespace BlogPostManagementService.Domain.BlogPosts.BusinessRules.EmailAddress;
 
 public class EmailAddressMaxLengthExceededFailure : Failure
 {

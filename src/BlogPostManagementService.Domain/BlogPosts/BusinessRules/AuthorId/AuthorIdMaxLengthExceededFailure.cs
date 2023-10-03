@@ -1,6 +1,6 @@
 using EmpCore.Domain;
 
-namespace BlogPostManagementService.Domain.BlogPosts.BusinessFailures.AuthorId;
+namespace BlogPostManagementService.Domain.BlogPosts.BusinessRules.AuthorId;
 
 public class AuthorIdMaxLengthExceededFailure : Failure
 {

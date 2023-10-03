@@ -1,6 +1,6 @@
 ﻿using EmpCore.Domain;
 
-namespace BlogPostManagementService.Domain.BlogPosts.BusinessFailures.EmbeddedResourse;
+namespace BlogPostManagementService.Domain.BlogPosts.BusinessRules.EmbeddedResourse;
 
 public class EmptyCaptionFailure : Failure
 {

@@ -1,4 +1,4 @@
-using BlogPostManagementService.Domain.BlogPosts.BusinessFailures.AuthorId;
+using BlogPostManagementService.Domain.BlogPosts.BusinessRules.AuthorId;
 using EmpCore.Domain;
 
 namespace BlogPostManagementService.Domain.BlogPosts.ValueObjects;

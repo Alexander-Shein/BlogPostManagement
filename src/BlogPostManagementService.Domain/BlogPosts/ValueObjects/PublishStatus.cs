@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
-using BlogPostManagementService.Domain.BlogPosts.BusinessFailures;
+using BlogPostManagementService.Domain.BlogPosts.BusinessRules;
+using BlogPostManagementService.Domain.BlogPosts.BusinessRules.PublishStatus;
 using EmpCore.Domain;
 
 namespace BlogPostManagementService.Domain.BlogPosts.ValueObjects;

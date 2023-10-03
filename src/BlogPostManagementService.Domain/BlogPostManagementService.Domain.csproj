@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Architecture\Domain\EmpCore.Domain\EmpCore.Domain.csproj" />
+
     </ItemGroup>
 
 

@@ -1,6 +1,6 @@
 ﻿using EmpCore.Domain;
 
-namespace BlogPostManagementService.Domain.BlogPosts.BusinessFailures.Content;
+namespace BlogPostManagementService.Domain.BlogPosts.BusinessRules.Content;
 
 public class ContentTooShortFailure : Failure
 {

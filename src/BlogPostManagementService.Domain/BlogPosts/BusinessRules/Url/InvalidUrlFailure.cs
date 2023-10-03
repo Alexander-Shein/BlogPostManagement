@@ -1,6 +1,6 @@
 using EmpCore.Domain;
 
-namespace BlogPostManagementService.Domain.BlogPosts.BusinessFailures.Url;
+namespace BlogPostManagementService.Domain.BlogPosts.BusinessRules.Url;
 
 public class InvalidUrlFailure : Failure
 {

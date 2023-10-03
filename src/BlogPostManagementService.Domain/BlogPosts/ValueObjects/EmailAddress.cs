@@ -1,4 +1,4 @@
-﻿using BlogPostManagementService.Domain.BlogPosts.BusinessFailures.EmailAddress;
+﻿using BlogPostManagementService.Domain.BlogPosts.BusinessRules.EmailAddress;
 using EmpCore.Domain;
 
 namespace BlogPostManagementService.Domain.BlogPosts.ValueObjects;

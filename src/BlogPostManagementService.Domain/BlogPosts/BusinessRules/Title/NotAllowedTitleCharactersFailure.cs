@@ -1,6 +1,6 @@
 ﻿using EmpCore.Domain;
 
-namespace BlogPostManagementService.Domain.BlogPosts.BusinessFailures.Title;
+namespace BlogPostManagementService.Domain.BlogPosts.BusinessRules.Title;
 
 public class NotAllowedTitleCharactersFailure : Failure
 {

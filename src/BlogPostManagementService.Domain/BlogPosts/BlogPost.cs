@@ -1,4 +1,4 @@
-﻿using BlogPostManagementService.Domain.BlogPosts.BusinessFailures.BlogPost;
+﻿using BlogPostManagementService.Domain.BlogPosts.BusinessRules.BlogPost;
 using BlogPostManagementService.Domain.BlogPosts.DomainEvents;
 using BlogPostManagementService.Domain.BlogPosts.ValueObjects;
 using EmpCore.Domain;

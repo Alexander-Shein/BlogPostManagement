@@ -1,6 +1,6 @@
 ﻿using EmpCore.Domain;
 
-namespace BlogPostManagementService.Domain.BlogPosts.BusinessFailures.Content;
+namespace BlogPostManagementService.Domain.BlogPosts.BusinessRules.Content;
 
 public class EmptyContentFailure : Failure
 {
@@ -11,3 +11,5 @@ public class EmptyContentFailure : Failure
 
     private EmptyContentFailure() : base(ErrorCode, ErrorMessage) { }
 }
+
+

@@ -1,13 +1,12 @@
-﻿using BlogPostManagementService.Domain.BlogPosts.ValueObjects;
-using EmpCore.Domain;
+﻿using EmpCore.Domain;
 
-namespace BlogPostManagementService.Domain.BlogPosts.BusinessFailures;
+namespace BlogPostManagementService.Domain.BlogPosts.BusinessRules.PublishStatus;
 
 public class InvalidPublishStatusFailure : Failure
 {
     private const string ErrorCode = "invalid_publish_status";
     private static readonly string ErrorMessage =
-        $"Invalid publish status. Possible values: ({String.Join(',', PublishStatus.List)}).";
+        $"Invalid publish status. Possible values: ({String.Join(',', ValueObjects.PublishStatus.List)}).";
 
     public string Value { get; }
 
